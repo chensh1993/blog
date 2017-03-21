@@ -6,25 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="哎呀标题迷路了">
-    <title>字符串的双重转义 - 哎呀标题迷路了</title>
+    <title>近况 - 哎呀标题迷路了</title>
     <meta name="author" content="前端小虾蟹">
     
     
     
-    <meta name="description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
+    <meta name="description" content="好久没有发博客了， 上一篇文章还是16年8月份的， 突然发现已经过了好久。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="字符串的双重转义">
-<meta property="og:url" content="http://noteawesome.com/2016/07/05/字符串的双重转义/index.html">
+<meta property="og:title" content="近况">
+<meta property="og:url" content="http://noteawesome.com/2017/03/21/近况/index.html">
 <meta property="og:site_name" content="哎呀标题迷路了">
-<meta property="og:description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/%E9%94%99%E8%AF%AF%E8%AF%A6%E6%83%85.png">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705131425.png">
-<meta property="og:updated_time" content="2017-03-21T00:20:12.000Z">
+<meta property="og:description" content="好久没有发博客了， 上一篇文章还是16年8月份的， 突然发现已经过了好久。">
+<meta property="og:updated_time" content="2017-03-21T11:41:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串的双重转义">
-<meta name="twitter:description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
-<meta name="twitter:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png">
+<meta name="twitter:title" content="近况">
+<meta name="twitter:description" content="好久没有发博客了， 上一篇文章还是16年8月份的， 突然发现已经过了好久。">
     
     
         
@@ -217,13 +213,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            字符串的双重转义
+            近况
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-07-05T12:38:33+08:00">
+    <time itemprop="datePublished" datetime="2017-03-21T13:22:21+08:00">
 	
-		    7月 05, 2016
+		    3月 21, 2017
     	
     </time>
     
@@ -233,38 +229,17 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>习惯了<code>SPA</code>的开发模式， 现在随便弄点什么东西， 渲染<code>HTML</code>什么的也总是通过<code>JS</code>来了， 但是在<code>JS</code>里写<code>HTML</code>总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。<br><a id="more"></a></p>
-<p>思路是这样的， 在一个目录下专门存放<code>html</code>, 然后通过<code>Nodejs</code>来读取<code>html</code>, 之后根据文件名和文件内容生成一个对象，如下所示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">test</span>: <span class="string">'&lt;div&gt;div1&lt;/div&gt;'</span>,</div><div class="line">  <span class="attr">test2</span>: <span class="string">'&lt;div&gt;div2&lt;/div&gt;'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>然后使用<code>JSON.stringify()</code>将这个对象转化为字符串， 存储为一个<code>JS</code>文件， 当然， 同时还会声明一个变量啊啥的， 大概就下面这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假设得到的字符串是`&#123;"test":"&lt;div&gt;div1&lt;/div&gt;"&#125;`  那么这个存储字符串的文件内容大概就是这样</span></div><div class="line"><span class="keyword">const</span> template = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"test":"&lt;div&gt;div1&lt;/div&gt;"&#125;'</span>);</div></pre></td></tr></table></figure>
-<p>之后在<code>html</code>里面引入这个<code>JS</code>, 然后就可以通过<code>template.test</code>来访问对应的<code>html</code>内的东西了。</p>
-<p>样子大概就是这个样子。然而人生不如意之事十之八九， 这句话放在码代码身上也不例外。也许还得改一改， 人生不如意之事100%！！！</p>
-<p>上面的<code>html</code>还是比较简单的， 然而谁会像我一样闲的蛋疼专门建一个<code>html</code>文件就为了放一个<code>div</code>.</p>
-<p>稍微来个复杂的， 假如一个叫<code>test2</code>的<code>html</code>内容如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>然后最后生成的文件内容是这样的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> template = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"test":"&lt;div class=\"container\"&gt;\r\n  &lt;div class=\"left\"&gt;&lt;/div&gt;\r\n  &lt;div class=\"right\"&gt;&lt;/div&gt;\r\n&lt;/div&gt;\r\n"&#125;'</span>);</div></pre></td></tr></table></figure>
-<p>耶， 真棒， 看起来好像没什么问题， 人家都还给转义了， 然后放到浏览器里一跑</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png" alt=""></p>
-<p>看看错误详情</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/%E9%94%99%E8%AF%AF%E8%AF%A6%E6%83%85.png" alt=""></p>
-<p>在错误详情里面可以明显地看到被引号引起来的<code>container</code>和其他周围的字符串颜色并不一样， 但是明明字符串里就加了转义字符的呀。</p>
-<h2 id="症结"><a href="#症结" class="headerlink" title="症结"></a>症结</h2><p>先说说转义字符的意思吧（我瞎蒙的， 说错了别打我）。</p>
-<p>比如<code>&quot;\&quot;&quot;</code>放到浏览器里运行的话， 得到的结果是<code>&quot;&quot;&quot;</code>。这里的斜杠就对中间的那个双引号进行了转义， 告诉浏览器这个东西表示的只是一个引号，你别解析错了， 因此得到的就是三个引号。所以在这里， 当浏览器把一个字面量转变为字符串的时候， 转义了一次， 吞了一次转义字符。</p>
-<p>如下图所示， 可以看到字符串字面量里面本来是有斜线的， 但是赋值给变量之后那斜线就被吃了。</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705131425.png" alt=""></p>
-<p>然后在进行<code>JSON.parse()</code>的时候， 无奈地碰到了双引号， 然后就悲剧地报错了。</p>
-<p>所以在对字符串进行转换， 转变为一个对象的时候依然需要进行转义， 前面提到过， 使用<code>\</code>进行转义， 但是<code>\</code>除了表示字符<code>\</code>之外， 也表示转义字符， 所以这里还需要对’\’进行转义， 也就是进行双转义。</p>
-<p>举个例子， 比如判断某个元素具不具有某个类名</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasClass</span> (<span class="params">sourceCls, cls</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span> + cls + <span class="string">'\\b'</span>, <span class="string">'g'</span>).test(sourceCls);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里就是先对<code>\</code>进行了转义，因此出现了两个<code>\</code>。</p>
-<p>所以简单的来说。。。双转义就是<code>&#39;\&#39; * 2</code>, 原本应该是一个的就上俩， 是两个的就上四个。</p>
-<p>然后负责读取文件生成数据的<code>JS</code>就成了这样</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> obj = &#123;&#125;;</div><div class="line">fs.readFile(<span class="string">'./test.html'</span>, (_, data) =&gt; &#123;</div><div class="line">  obj.test = data.toString();</div><div class="line">  fs.writeFile(<span class="string">'./testJSON.js'</span>, <span class="string">'const template = JSON.parse(\''</span> + getStr(obj) + <span class="string">'\');'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStr</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="comment">// 通过JSON.stringify序列化后的加了转义符号的字符串大概就是\"这个样子</span></div><div class="line">  <span class="comment">// 所以这里的两根斜杠前者只是对后者的转义而已</span></div><div class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data).replace(<span class="regexp">/\\/g</span>, <span class="string">'\\\\'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然， 上面那种方式比较简单粗暴， 只是为了说明一下怎么解决这个问题而已。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就我自己的理解来的话， 需要双转义的地方一般是进行了两次解析的， <code>字面量 =&gt; 字符串 =&gt; ..</code>, 这里的<code>..</code>可能是正则表达式， 也可能是其他的啥啥啥。。。</p>
-<p>最后， 感谢<a href="https://segmentfault.com/u/aristotll" target="_blank" rel="external">aristotll</a>对我问题的回答。</p>
+            <p>好久没有发博客了， 上一篇文章还是16年8月份的， 突然发现已经过了好久。<br><a id="more"></a></p>
+<p>之所以没有发文章， 一方面是自己没有那么多的时间吧(其实是懒)， 当然， 之前的时候其实也并没有写过什么。再加上自己平时学的东西挺杂的， 大多也都是和业务相关的东西， 很难理成一个体系， 并且将其总结出来。</p>
+<p>所以一般碰到有什么有意义的或者有趣的东西的时候， 就直接到这个博客的仓库里面的<a href="https://github.com/374632897/blog/issues" target="_blank" rel="external">issue</a>里记了下来。</p>
+<p>后来买了Mac之后， 发现Mac的备忘录的功能挺好用的， 虽然不支持markdown， 但是无序列表啊有序列表啥的， 打个<code>*</code>却还是能出来的， 而且里面放截图啊修改啊什么的也比较方便。 所以那之后自己有什么东西就直接记录到了备忘录里面去了。 现在备忘录里面分了三个类别，<code>备忘录</code>、<code>todoList</code>以及<code>读书笔记</code>。 感觉Mac真的挺好的， 备忘录不错， 因为是Unix系的， 所以对于命令行的支持也不错， 自带的预览功能在看PDF的时候做笔记也很方便，软件什么的也没有广告， 到现在自己所碰见的广告都是看网页的时候碰到的， 毕竟<code>web</code>内容本就繁杂， 这个也确实不好处理。 当然， 最棒的一点还是， 以后可以装逼啦。</p>
+<p>这段时间也尝试了开始看计算机基础的书， 毕竟自己本来就是一个重视基础的人， 然而又非科班出生， 所以， 计算机基础方面的东西，大概会成为自己以后的短板吧。 因此想要学习算法学习计算机系统。 那我也是好好学过一段时间的， 但是这些东西看起来确实是一个痛苦的过程。 无论是算法第四版， 还是CSAPP。 可能是习惯了其他的阅读模式了吧， 总是想要在很短的时间内将书看完， 以至于， 这两本书， 我看了又看， 终究还是看不大懂， 最后， 每一次的阅读， 也都是无疾而终， 并没有太大收获， 归根结底， 还是应该是自己心里比较浮躁， 不能够静下心来好好学习吧。</p>
+<p>2月， 年过完了之后回来， 自己似乎有点摸不大清方向了， 事实上， 最近这几个月， 我一直都找不到方向， 不知道自己到底应该学什么， 很多时候都会觉得自己是在瞎忙活。 但是总会觉得有些点是比较重要， 需要下力气去学习的， 一是Git， 而是Linux， 三是Sublime快捷键， 四是docker.</p>
+<p>上述的四种或是经常使用， 或是对自己的开发效率有所裨益。 <code>Git</code>自然不用说， 公司的代码就是托管在GitHub上面的， 而且使用它来进行代码管理也确实方便， 自从换了Mac之后， 就没有再使用其图形界面了， 使用命令行来进行操作， 效率真的很高， 而且能够做到很多图形界面不能够做到的事情。然而<code>Git</code>的命令行参数之多， 却足以让我望而却步， 通常学了之后， 短时间内还能记得， 但是时间一长也就忘了。 <code>Linux</code>这个， 与其说是<code>Linux</code>， 还不如说是命令行吧， 依托于众多的GNU命令， 使用<code>bash</code>能够进行非常多的操作， 并且编写这样的一个脚本并不会耗费太多时间，代码量也不会太多。而且命令行使用久了， 自己也就习惯了那样的一种快速的输入模式， 对于提升开发效率是有很大帮助的。同时， 配合众多软件的命令行接口， 能够做到很多不可思议的事情。 Sublime是我常用的编辑器， 所以对于我来说， 能够记住其常用的快捷键的话， 那么可以免除很多多余的操作， 这样也是能够极大提升开发效率的， 然而我现在依然有很多快捷键不能记起o(╯□╰)o 。 <code>docker</code>这个， 接触的时间算是比较短的， 然而它却让我这种喜欢尝鲜新事物和瞎折腾的人爱不释手。当我需要使用某个软件新版本的特性的时候， 只需要找到对应的镜像， 拉下来， 以此构建容器， 一跑就行了， 或者也可以自己开个操作系统， 在里面自己下载安装编译， 最重要的一点是， 这些东西并不会影响到宿主环境， 所以可以放心折腾。 然而学习它的时间终究太短， 使用的时间也比较短o(╯□╰)o 。</p>
+<p>上面提到二月的时候， 其实原本是想说自己过年回来之后无所事事， 然后又有了学习框架的念头的。 以前我也学习过一些其他的框架， 然而终究因为没有什么应用场景， 而一一忘记了， 这种事情其实是很让人恼火的， 因为你花了时间， 但是最后似乎又什么都没有收获到。所以， 长久以来我对学框架这件事一直都是持有非常抗拒的态度的， 除非是生产环境需要， 否则我宁愿把时间花在更有意义的事情上。 这一次想要学框架， 大概又是因为自己的心浮躁了起来吧。学的Vue, 一来因为它是国人写的， 二来， 知乎上面似乎也有好多人谈这个。哪， 说学就学吧。 其实这个学也就只是看看文档、照着例子写写罢了， 最后再来个<code>todoList</code>然后就毕业了？ 我刚刚把文档看完之后， 就把自己以前的一个小项目给改写了， 也加了一些新的东西， 网址在<a href="https://noteawesome.com/cost-vue">这里</a>。 总的说下来， 开发体验还是很好的。 公司使用的框架是<code>backbone</code>， 每次都需要在<code>View</code>里面手动监听事件， 其实还是挺累的， 现在这个的体验， 正如其作者所说， “让用户能够专注于业务”。 另外的一点就是它<code>*.vue</code>的这种单文件组件让人的感觉非常好。 以前的时候， 每次写组件， 需要到<code>components</code>里面写<code>template</code>和<code>view</code>, 然后去<code>styles</code>里面写样式， 说实话， 这种在多文件间切换的感觉其实是让人很不爽的。 尤其是在项目变得越加庞大的时候。而现在， 我只需要打开一个文件， 就能编辑样式、<code>js</code>及模板， 感觉还是很爽的， 当然， 偶尔也需要开两个窗， 左边拉到模板， 右边拉到样式或者其他的。二月下旬的时候， 突然有了新的需求， 要做易信的PC版， 秦阳也说准备开始一些新的尝试， 采用新的框架， 当时他提了<code>Vue</code>, 刚好那会儿我也学了这个， 他便说这个项目由我来做， 从环境到开发到发布。 事实上我内心还是有点怂的， 因为我知道我一直都不会搭环境， 不是不会搭， 只是搭出来的环境太丑了， 不论是文件层次结构， 还是代码结构， 都很丑。 这一次他说给我做， 我也只好应承下来， 毕竟公司就三个前端。另外一个同事那会儿又在忙着做其他的东西。环境大概搭建好了之后， 才知道原来这是一件这么苦逼的事情， 因为有太多的问题要处理， 开发环境、生产环境、测试环境。还有<code>sourcemap</code>, 这是一个大问题， 毕竟谁也不想打断点打不上， 或者明明打的这里， 最后却跳到了那里， 这个问题也是最让人苦逼的了o(╯□╰)o， 后来开始正式开发之后， 才真正感觉到了Vue是如此地适合敏捷开发。</p>
+<p>忘了是二月还是三月了， 自己也花了6元钱， 在阿里云上买了个啥的来着？ 我给忘了， 反正后来网站是备了案了， 然后使用了<code>cloudFlare</code>， 改了<code>DNS</code>解析， 就能通过<code>cloudFlare-nginx</code>反向代理来蹭<code>https</code>流量了， 话说小绿色的<code>https</code>看起来真是让人喜欢。只不过国内访问速度不大稳定， 有时快， 有时慢， 虽然大部分时间都是后者o(╯□╰)o 。</p>
+<p>3月的时候， 还换了手机， 起因是做易信开发的时候， 强哥让我下个易信手机客户端， 结果下好了之后， 装不了， 提示我内存不足， 然后我还能怎么办？ 只有删应用呗， 删啊删啊， 还是不行， 最后删来只剩微信了都o(╯□╰)o 。 那会儿感觉挺o(╯□╰)o的， 因为我一直对手机没有什么需求， 自己手机本来就用的少， 最多就拿来给家里打打电话， 收收微信啥的， 也不需要多高大上。 这一次是真的被伤到了。 其实之前还有个红米Note， 用了也有两年了， 结果前段时间突然不能充电了， 不能充电， 自然也就用不了了， 然后就只有用红米了o(╯□╰)o 。 给爸妈买的手机也是小米5和5s， 结果回家之后看他们手机上面， 一天能够推几十条广告， 文件管理、日历里面都是广告， 简直丧心病狂。 那这一次自己想要换手机了， 小米肯定是不行， 就换个iPhone 7吧o(╯□╰)o 。 然后就忍痛买了个7o(╯□╰)o， 还是亮黑的， 因为喜欢这个颜色。</p>
+<p>还有一些事， 一直困扰着我， 以至于我最近这一段时间的精神状态非常差， 也就不说了吧。</p>
 
             
         </div>
@@ -274,7 +249,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/随笔/">随笔</a>
 
             </div>
         
@@ -283,7 +258,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/"  data-tooltip="electron no path.txt的解决办法">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -291,7 +266,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/04/HTML5-Canvas核心技术读书感悟/" data-tooltip="HTML5 Canvas核心技术读书感悟">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/15/基于git-diff的eslint代码检测/" data-tooltip="基于git diff的eslint代码检测">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -306,17 +281,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -364,7 +339,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/"  data-tooltip="electron no path.txt的解决办法">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -372,7 +347,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/04/HTML5-Canvas核心技术读书感悟/" data-tooltip="HTML5 Canvas核心技术读书感悟">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/15/基于git-diff的eslint代码检测/" data-tooltip="基于git diff的eslint代码检测">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -387,17 +362,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -423,17 +398,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/21/近况/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -717,9 +692,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://noteawesome.com/2016/07/05/字符串的双重转义/';
+                 this.page.url = 'http://noteawesome.com/2017/03/21/近况/';
                  
-                    this.page.identifier = '2016/07/05/字符串的双重转义/';
+                    this.page.identifier = '2017/03/21/近况/';
                  
              };
             (function() {
