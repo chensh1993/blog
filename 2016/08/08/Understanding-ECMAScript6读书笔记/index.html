@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="哎呀标题迷路了">
+    <title>Understanding ECMAScript6读书笔记 - 哎呀标题迷路了</title>
+    <meta name="author" content="前端小虾蟹">
+    
+    
+    
+    <meta name="description" content="关于const和let
+没有变量声明提升， 存在TDZ，因此下列情况下会报错（使用typeof大多不会报错， 但是const和let是个例外）">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Understanding ECMAScript6读书笔记">
+<meta property="og:url" content="http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/index.html">
+<meta property="og:site_name" content="哎呀标题迷路了">
+<meta property="og:description" content="关于const和let
+没有变量声明提升， 存在TDZ，因此下列情况下会报错（使用typeof大多不会报错， 但是const和let是个例外）">
+<meta property="og:updated_time" content="2017-03-21T00:20:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Understanding ECMAScript6读书笔记">
+<meta name="twitter:description" content="关于const和let
+没有变量声明提升， 存在TDZ，因此下列情况下会报错（使用typeof大多不会报错， 但是const和let是个例外）">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://noteawesome.com/assets/images/lookAtMe.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-yrst5vo1nxaxbp2g3v9na2wg1lixlpr3ghbjdvskeixmu79deycecx3rh4bt.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-76738066-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?74b53e5f27776bad072a049eea077d01";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">哎呀标题迷路了</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">前端小虾蟹</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p><a href="https://noteawesome.com/pro/">个人简介</a></p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/374632897/" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Understanding ECMAScript6读书笔记
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-08-08T18:50:38+08:00">
+	
+		    8月 08, 2016
+    	
+    </time>
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h1 id="关于const和let"><a href="#关于const和let" class="headerlink" title="关于const和let"></a>关于<code>const</code>和<code>let</code></h1><ul>
+<li><p>没有变量声明提升， 存在TDZ，因此下列情况下会报错（使用<code>typeof</code>大多不会报错， 但是<code>const</code>和<code>let</code>是个例外）</p>
+<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> name);<span class="comment">// Uncaught ReferenceError: name is not defined</span></div><div class="line">  <span class="keyword">const</span> name = <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line">say();</div></pre></td></tr></table></figure>
+</li>
+<li><p>不能在同一作用域内重复声明</p>
+</li>
+<li><p>在<code>for...in</code>和<code>for...of</code>循环里面， 每次的循环都会重新绑定上下文， 所以此时的变量声明应该用<code>const</code>来代替<code>let</code>，但是在<code>for</code>循环里就行不通了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> obj = &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'Jason'</span>,</div><div class="line">  <span class="attr">age</span>: <span class="number">22</span></div><div class="line">&#125;；</div><div class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> obj) &#123;</div><div class="line">  <span class="built_in">console</span>.log(obj[key]);</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</div><div class="line">  <span class="built_in">console</span>.log(arr[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>关于使用块级作用域的最佳实践就是默认使用<code>const</code>， 只有在你知道这个变量有可能发生变化的时候， 才使用<code>let</code></p>
+</li>
+</ul>
+<h1 id="关于字符串和正则表达式"><a href="#关于字符串和正则表达式" class="headerlink" title="关于字符串和正则表达式"></a>关于字符串和正则表达式</h1><ul>
+<li>涉及到<code>UTF-16</code>部分的知识， 因为用得很少， 所以就直接略过了。</li>
+<li><p>正则表达式新增<code>u</code>标记， 用来表明进行<code>unicode</code>匹配?? 要检测浏览器是否支持该标记， 应该使用正则表达式的构造函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSupportUFlag</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">var</span> re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'.'</span>, <span class="string">'u'</span>);</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串新增检测方法</p>
+<ul>
+<li><code>includes</code> 注意是<code>includes</code>而不是<code>include</code> . 检测字符串是否包含指定字符</li>
+<li><code>startsWith</code> 注意是<code>startsWith</code>而不是<code>startWith</code>, 检测字符串是否以指定字符开始</li>
+<li><code>endsWith</code>注意是<code>endsWith</code>而不是<code>endWith</code>, 检测字符串是否以指定字符结束</li>
+<li>以上三种方法都接受两个参数， 第一个参数为字符串（注意：不能是正则表达式），第二个参数为开始的位置</li>
+<li>当第二个参数的值大于字符串长度的时候， 可以理解为将会忽略该参数（实际上此时<code>startsWith</code>和<code>includes</code>将会从字符串开始处进行查找， 而<code>endsWith</code>会从结尾处开始查找， 所以其实也是差不多的）。</li>
+</ul>
+</li>
+<li>字符串重复方法<code>repeat</code>, 参数为期待重复次数（重复为0的时候字符串为空）</li>
+<li><p>正则表达式的<code>y</code>标识， 告诉引擎从指定的<code>lastIndex</code>开始进行匹配（应该是需要其每个都匹配，而不是跳跃性匹配）， 如果找不到匹配项， 将会停止匹配。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/hello\d\s?/y</span>;</div><div class="line"><span class="keyword">var</span> str = <span class="string">'hello1 hello2 hello3'</span>;</div><div class="line">re.exec(str); <span class="comment">// ["hello1 "]</span></div><div class="line">re.lastIndex = <span class="number">1</span>; <span class="comment">// 指定从字符串索引为1的位置开始进行匹配</span></div><div class="line">re.exec(str);<span class="comment">// null</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>正则表达式新增特性</p>
+<ul>
+<li>当使用正则表达式字面量来作为<code>new RegExp</code>的第一个参数的时候， 在<code>ES5</code>下， 第二个参数不能够为标识符， 但是在<code>ES6</code>下， 是可以的。但是要注意的是， 这样得到的正则表达式， 其标识符将完全由指定的第二个参数决定， 与原来的字面量无关。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> re = <span class="regexp">/hello/y</span>;</div><div class="line"><span class="keyword">var</span> _re = <span class="keyword">new</span> <span class="built_in">RegExp</span>(re, <span class="string">'ig'</span>);</div><div class="line"><span class="built_in">console</span>.log(_re); <span class="comment">// /hello/gi // 注意这里排序了的， 另外， 其原有的y标识没了</span></div></pre></td></tr></table></figure>
+<ul>
+<li>新增正则表达式的<code>flags</code>属性， 用于返回正则表达式的标识符</li>
+</ul>
+</li>
+<li><p>模板字符串</p>
+<ul>
+<li>在模板字符串里使用未经定义的变量的话会报错</li>
+<li><p>关于标签</p>
+<ul>
+<li>使用一个函数来定义标签</li>
+<li>使用的时候直接使用函数名``模板字符串即可</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> test = <span class="function">(<span class="params">...args</span>) =&gt;</span> <span class="built_in">console</span>.log(args);</div><div class="line">test<span class="string">`hello world`</span>; <span class="comment">// [Array[1]]</span></div></pre></td></tr></table></figure>
+<ul>
+<li>该标签函数的第一个参数为字符串数组， 其每一项为模板字符串所用变量切割后组成的字符串， 其他参数则依次为由变量所解析出来的结果。</li>
+<li>书上面说的使用模板字符串可以实现转义效果，但是自己试了并不行， 不知道为什么。<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.raw<span class="string">`Multiline\nstring`</span>; <span class="comment">// 书上的结果是"Multiline\\nstring", 但是自己得到的结果还是"Multiline\nstring"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ul>
+<li><p>函数默认参数。 只有在调用函数的时候没有在指定位置传递参数的情况下才会使用默认参数， 这个判断过程可以认为是通过<code>typeof</code>来判断的。也就是说， 只有在参数值为<code>undefined</code>的时候才会使用（特别指定为<code>undefined</code>或者说没有传递该参数的时候）默认参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span> (<span class="params">a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(a, b, c);</div><div class="line">&#125;</div><div class="line">test(<span class="literal">undefined</span>, <span class="literal">null</span>, <span class="number">0</span>); <span class="comment">// 1 null 0</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>ES6下对函数参数的重赋值不会反映到函数的<code>arguments</code>对象上(自己试了下， 只有在严格模式下才不会)</p>
+</li>
+<li><p>函数的默认参数也存在TDZ， 也就是说， 在他们被初始化之前， 是不能够被访问的， 因此在函数参数里面， 一个参数只具有对其前面位置的参数的访问权限， 如果尝试访问后面的参数的时候， 就会报错。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">first = second, second</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> first + second;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">1</span>)); <span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>)); <span class="comment">// 书上的这里写了throws error ， 但是实际上这里不应该会报错的， 因为指定了第一个参数， 那么就不会调用first = second. 所以也就不会访问第二个参数， 因此第二个参数是undefined， 所以最后的结果应该是NaN， 实际上检测出来的也是这种情况。</span></div><div class="line"><span class="built_in">console</span>.log(add(<span class="literal">undefined</span>, <span class="number">1</span>)); <span class="comment">// 要想触发报错的话， 可以手动指定第一个参数为undefined， 所以， 感觉上这种情况应该会比较少</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>rest</code>参数</p>
+<ul>
+<li><code>rest</code>只能有一个， 并且必须在最后</li>
+<li><p>在对象字面量的<code>setter</code>里面是不能够使用<code>rest</code>参数的（书上是这样写的， 但是自己尝试了以后发现是可以的）， 因为<code>setter</code>函数被限制为只能够接受1个参数。 PS: 方式不对</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 错误的方式</span></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  set (...rest) &#123;</div><div class="line">    <span class="built_in">console</span>.log(rest); <span class="comment">// 这里set只是其一个方法， 并没有涉及到setter</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 正确的报错打开方式</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">  set name (...rest) &#123; <span class="comment">// 此时才算是调用了setter</span></div><div class="line">    <span class="comment">// Setter function argument must not be a rest parameter</span></div><div class="line">    <span class="keyword">this</span>.name = rest;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>spread</code>可以用于将数组内容展开。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line"><span class="built_in">Math</span>.max(...arr); <span class="comment">// 相当于是把数组两遍的方括号去掉</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>函数的<code>name</code>属性</p>
+<ul>
+<li>如果函数有name(<code>function</code>关键字后面的词)， 则其name属性为其name， 若有函数名， 则为函数名</li>
+<li>匿名函数的name在没有指定name的情况下为<code>anonymous function</code></li>
+<li>使用<code>bind</code>绑定了上下文的函数其name属性会被添加<code>bound</code>前缀</li>
+<li>name属性只是起到一个标识的作用以便于调试， 并不能够通过name来获取到一个函数的引用。</li>
+</ul>
+</li>
+<li>函数调用的两种方法<ul>
+<li>在调用函数的时候如果使用了<code>new</code>操作符， 那么就会调用函数的[[construct]]方法</li>
+<li>如果没有使用<code>new</code>操作符， 那么将会调用函数的[[call]]方法。</li>
+<li>箭头函数不能用作构造函数， 也就是说不能够使用<code>new</code>操作符</li>
+<li><code>new.target</code>: 在使用了new操作符的时候，<code>new.target</code>的将会指向这个函数， 否则将会是<code>udnefined</code>.</li>
+<li>在函数体外面使用<code>new.target</code>将会抛出语法错误</li>
+</ul>
+</li>
+<li><p>块级函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s1ayName);<span class="comment">// undefined;</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="keyword">typeof</span> sayName); <span class="comment">// function</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">s1ayName</span> (<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s1ayName); <span class="comment">// 在严格模式下， 这里是undefined, 非严格模式下这里是function</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>箭头函数</p>
+<ul>
+<li>没有<code>this</code>, <code>super</code>, <code>arguments</code>, <code>new.target</code>绑定。 箭头函数内的这些值都由距离该函数最近且包含该函数的非箭头函数所决定。</li>
+<li>不能对箭头函数使用<code>new</code>操作符（箭头函数不具有<code>[[construct]]</code>方法）</li>
+<li>没有原型对象（prototype）。</li>
+<li>不能改变this（普通函数作为构造函数的时候其this是指向新构建的对象的）</li>
+<li>没有arguments对象作为函数参数列表</li>
+<li>没有重复命名参数（No duplicate named arguments）， 这个不大懂</li>
+<li><p>箭头函数语法上需要注意的一些地方</p>
+<ul>
+<li>箭头函数里的花括号主要用于标识函数体， 当你希望返回一个对象的时候， 需要将该对象用圆括号包裹。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> get = <span class="function"><span class="params">id</span> =&gt;</span> (&#123; <span class="attr">name</span>: <span class="string">'Jason'</span>, <span class="attr">age</span>: <span class="number">22</span> &#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>对箭头函数使用自调用立即执行函数表达式（IIFE – imediately invoked function expressions）的时候， 需要使用圆括号将函数体包裹起来。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>尾调用优化（Tail call Optimization）<ul>
+<li>尾调用的函数不会访问当前调用栈中的变量， 也就是说当前的函数不是一个闭包</li>
+<li>在尾调用执行后没有其他操作</li>
+<li>尾调用的值会作为函数值返回（需要有return）</li>
+<li>例如， 以下情况下不会有尾调用优化：<ul>
+<li>函数尾调用另一个函数的时候没有返回该函数执行结果的值</li>
+<li><code>return</code>语句里有除了函数调用之外的其他操作</li>
+<li>另外， 在把一个函数的执行结果保存为变量，然后再返回这个变量的话， 也不会有尾调用优化（尾调用函数的结果需要立即返回）</li>
+<li>闭包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>怎样管理尾调用优化<ul>
+<li>尾调用优化常用于函数递归</li>
+</ul>
+</li>
+</ul>
+<h1 id="对象函数展开式"><a href="#对象函数展开式" class="headerlink" title="对象函数展开式"></a>对象函数展开式</h1><ul>
+<li>对象简写 — 可以使用<code>super</code>, 非简写形式不行。 此外， 简写形式下不能使用bind</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  sayName () &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"Jason"</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>改变对象原型</p>
+<ul>
+<li>通常情况下， 对象的原型会在对象创建的时候通过构造器或者Object.create()方法来指定</li>
+<li><code>Object.setPrototypeOf(object, prototype)</code> 方法允许你通过给定的对象来改变原型(将prototype设为object的原型对象）</li>
+<li>对象的原型对象保存在内部属性[[prototype]]中</li>
+</ul>
+</li>
+<li><p>使用超类（super）引用进行更简单的原型对象访问</p>
+<ul>
+<li>最简单的使用便是通过super来访问当前对象的原型对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> base = &#123;</div><div class="line">  say () &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'base'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> c = &#123;</div><div class="line">  say () &#123;</div><div class="line">    <span class="keyword">super</span>.say();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'c'</span>)</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="built_in">Object</span>.setPrototypeOf(c, base);</div><div class="line">c.say();</div><div class="line"><span class="comment">// 'base'</span></div><div class="line"><span class="comment">// 'c'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// var friend = &#123;</span></div><div class="line"><span class="comment">//  say () &#123;</span></div><div class="line"><span class="comment">//    return super.say(); // 类似于Object.getPrototypeOf(this).say.call(this)；</span></div><div class="line"><span class="comment">//  &#125;</span></div><div class="line"><span class="comment">//&#125;；</span></div></pre></td></tr></table></figure>
+<ul>
+<li>对象的方法仅仅是使用函数来代替数据作为对象属性值。 ES6定义了一个内部属性[[HomeObject]]来指明对象方法的归属。</li>
+<li>当函数并非一个对象的方法的时候， 不能够使用super</li>
+</ul>
+</li>
+<li><p>对象解构</p>
+<ul>
+<li>在不使用声明的方式而是直接重新解构赋值的时候， 需要用圆括号包裹解构部分<code>({ type, name } = node);</code>(用于告诉引擎这部分并不是块级语句， 只是一个表达式)</li>
+<li>在解构的时候如果表达式右边是<code>null</code>或者<code>undefined</code>， 则会报错</li>
+<li>一个值得注意的问题， 看下面的代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> node = &#123;</div><div class="line">  <span class="attr">type</span> : <span class="string">'Identifier'</span>,</div><div class="line">  <span class="attr">name</span>: <span class="string">'foo'</span></div><div class="line">&#125;, type = <span class="string">'Literal'</span>, name = <span class="number">5</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outputInfo</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(value === node)</div><div class="line">&#125;</div><div class="line">outputInfo(&#123; type, name &#125; = node) <span class="comment">// true // 这里对type和name进行了重赋值， 所以下文的也有改变</span></div><div class="line">type <span class="comment">// Idetifier</span></div><div class="line">name <span class="comment">// foo</span></div></pre></td></tr></table></figure>
+<ul>
+<li>可以通过使用<code>=</code>来指定默认参数， 默认参数只有在缺少该参数， 或者参数值为<code>undefined</code>的时候才会被调用</li>
+<li>指定变量名 + 默认值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> node = &#123;</div><div class="line">  <span class="attr">type</span>: <span class="string">'Identifier'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> &#123; <span class="attr">type</span>: lcoalType, <span class="attr">name</span>: localName = <span class="string">'bar'</span> &#125; = node;</div><div class="line">localName <span class="comment">// bar</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在解构中， 有冒号的地方， 就表示冒号后面的部分为其对应值的展开式（冒号右边即为对应值）</li>
+<li>在解构中， 空的花括号是合法的， 但是使用这个并不会有任何效果</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> &#123; <span class="attr">loc</span>: &#123;&#125; &#125; = node; <span class="comment">// 没有任何一个变量被声明。</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>数组解构</p>
+<ul>
+<li>最常用的一个便是交换变量值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</div><div class="line">[a, b] = [b, a];</div><div class="line">a <span class="comment">// 2</span></div><div class="line">b <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+<ul>
+<li>数组的复制</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="comment">// 以前</span></div><div class="line"><span class="keyword">var</span> arr2 = arr.concat();</div><div class="line"><span class="comment">// 现在可以这样写</span></div><div class="line"><span class="keyword">var</span> arr3 = [...arr];</div></pre></td></tr></table></figure>
+<ul>
+<li>Rest参数必须要在数组解构的最后， 并且后面不能跟逗号， 否则抛出语法错误</li>
+</ul>
+</li>
+<li><p>函数参数解构</p>
+<ul>
+<li>111</li>
+</ul>
+</li>
+</ul>
+<h1 id="Symbols"><a href="#Symbols" class="headerlink" title="Symbols"></a>Symbols</h1><ul>
+<li>Symbol是一种原始数据类型， 并且是唯一一种没有字面量的原始数据类型</li>
+<li>因为Symbol是原始类型，所以调用的时候如果使用了new操作符， 将会报错</li>
+<li>Symbol接受一个参数来作为其描述， 该参数本身并不能作为属性访问器， 主要用于阅读及调试的便利（作为标识符）</li>
+<li>作为原始类型， Symbol是可以使用typeof 操作符来判断类型的</li>
+<li>不能对Symbol进行数学运算， 否则会报错， 但是可以对其使用逻辑操作符， 此时， symbol会被转化为true</li>
+<li>Symbol不会通过Object.keys()来返回， 可以通过Object.getOwnProperyNames()来获取</li>
+<li><p>当你要创建一个可共享的Symbol的时候， 可以使用Symbol.for()， 它接受唯一的字符串参数作为其标识符。 当使用这个的时候， 会首先查找全局Symbol查看是否注册， 如果注册了， 则直接返回该Symbol， 否则， 则创建一个并注册。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>.for(<span class="string">'1'</span>);</div><div class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>.for(<span class="number">1</span>);</div><div class="line">s1 === s2 <span class="comment">// true  注意，因为Symbol接受的参数为字符串， 所以传递数值的时候被转化为字符串了</span></div><div class="line"><span class="built_in">Symbol</span>.keyFor(s1); <span class="comment">// '1'</span></div><div class="line"><span class="built_in">Symbol</span>.keyFor(s2); <span class="comment">// '1' // 字符串</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>知名Symbols (well-known symbols)（@@create =&gt; Symbol.create）</p>
+<ul>
+<li>@@hasInstance – instanceof   <code>obj instanceof Array =&gt; Array[Symbol.hasInstance](obj)</code>;</li>
+<li>@@isConcatSpreadable  — Array.prototype.concat()   <code>此属性用于表明对象作为concat()方法的参数的时候， 是否把里面的每一项作为单独元素添加进目标数组里</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> col = &#123;</div><div class="line">  <span class="number">0</span>: <span class="string">'hello'</span>,</div><div class="line">  <span class="number">1</span>: <span class="string">'world'</span>,</div><div class="line">  <span class="attr">length</span>: <span class="number">2</span></div><div class="line">&#125;, c = [<span class="string">'hi'</span>];</div><div class="line">c.concat(col); <span class="comment">// ["hi", Object]</span></div><div class="line">col[<span class="built_in">Symbol</span>.isConcatSpreadable] = <span class="literal">true</span>;</div><div class="line">c.concat(col); <span class="comment">// ["hi", "hello", "world"]</span></div></pre></td></tr></table></figure>
+<ul>
+<li>@@iterator — 返回一个迭代器</li>
+<li>@@match — String.prototype.match()  — 接受字符串参数， 有匹配则返回数组， 否则返回null</li>
+<li>@@replace — String.prototype.repalce() — P149</li>
+<li>@@species — 决定一个对象应该怎么生成的构造器</li>
+<li>@@split — String.prototype.split();</li>
+<li>@@toPrimitive — 返回对象原始值的方法, 接受一个参数<code>hint</code>用来表明应该返回哪种数据类型（三种模式： string, number, default — 在对对象使用 ‘==’或者’+’的时候， 使用默认模式）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span> (<span class="params">age</span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.age = age;</div><div class="line">&#125;;</div><div class="line">B.prototype[<span class="built_in">Symbol</span>.toPrimitive] = <span class="function"><span class="keyword">function</span> (<span class="params">hint</span>) </span>&#123;</div><div class="line">  <span class="keyword">switch</span> (hint) &#123;</div><div class="line">    <span class="keyword">case</span> <span class="string">'number'</span>:</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.age;</div><div class="line">    <span class="keyword">case</span> <span class="string">'string'</span>:</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.age + <span class="string">''</span>;</div><div class="line">   <span class="keyword">default</span>:</div><div class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.age + <span class="string">'years old'</span>;</div><div class="line"> &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</div><div class="line">+b; <span class="comment">// 12</span></div><div class="line"><span class="string">''</span> + b; <span class="comment">// "12years old"</span></div><div class="line"><span class="built_in">String</span>(b); <span class="comment">// '12'</span></div></pre></td></tr></table></figure>
+<ul>
+<li>@@toStringTag — 使用Object.prototype.toString.call()或者String.prototype.toString()时返回对象描述</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123; <span class="keyword">this</span>.name = name&#125;</div><div class="line"><span class="keyword">var</span>  p = <span class="keyword">new</span> Person(<span class="string">'Jason'</span>);</div><div class="line">Person.prototype[<span class="built_in">Symbol</span>.toStringTag] = <span class="string">'Person'</span>;</div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(p); <span class="comment">// "[object Person]"</span></div><div class="line">p.toString(); <span class="comment">// "[object Person]"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>@@unsopables — an object whose properties are the names of object properties that should not be included in a with statement.  主要针对 <code>with</code>语句。 P157</li>
+<li>重写由well-known symbols定义的方法， 可以将普通对象改变为外来对象从而改变内部默认行为</li>
+<li>重写方法需要使用<code>Object.defineProperty()</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="Sets-And-Maps"><a href="#Sets-And-Maps" class="headerlink" title="Sets And Maps"></a>Sets And Maps</h1><ul>
+<li>Set是一个不包含重复值的列表</li>
+<li>Map是一个包含键值对的集合</li>
+<li><code>Object.create(null)</code>得到的对象是没有原型对象的（原型为null</li>
+<li>Set<ul>
+<li>如果多次给Set添加重复值， 那么第一次之后的行为将会被忽略</li>
+<li>可以在new Set的时候传递一个数组来对Set进行初始化</li>
+<li>方法： add, delete, clear,has,forEach(三个参数： item, index, Set本身， 第一个参数和第二个参数是相同的)</li>
+<li>forEach可以接受第二个参数作为回调函数里的this</li>
+<li>将set转化为数组： var arr = […set]</li>
+</ul>
+</li>
+<li>WeakSet<ul>
+<li>WeakSet只存储弱对象引用（也就是说， 如果除weakSet之外， 没有其他地方引用到该对象的话， 那么weakSet将会删除它）， 不能用于存储原始类型的值。</li>
+<li>只有三种方法： add, delete, has</li>
+</ul>
+</li>
+<li>Map<ul>
+<li>方法： delete, has, get, set, forEach, clear</li>
+<li>初始化： 接受一个数组， 数组里的每一项也是一个数组， 子数组的第一项为key, 第二项为value</li>
+</ul>
+</li>
+<li><p>WeakMap</p>
+<ul>
+<li>键（key）必须为非null对象， 不能是原始值</li>
+<li>这里碰到一个问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line">t.set(o, <span class="string">'test'</span>);</div><div class="line">o = <span class="literal">null</span>;</div><div class="line"><span class="comment">// 按照道理来说， o的引用被删除之后， t的对应键值也应该被删除啊</span></div><div class="line"><span class="comment">// 原来是因为垃圾收集的周期性， 当解除引用之后， 只有在下一次垃圾收集的时候才会被删除， 这个可以通过手动调用垃圾收集来查看</span></div><div class="line">t; <span class="comment">// WeakMap &#123;Object &#123;&#125; =&gt; "test"&#125;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>Set和Map的实例有size属性， 但是WeakSet和WeakMap的实例是没有该属性的。</li>
+</ul>
+</li>
+<li><p>私有对象数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> privateData = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">    privateData.set(<span class="keyword">this</span>, &#123;<span class="attr">name</span>: name&#125;)</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  Person.prototype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> privateData.get(<span class="keyword">this</span>).name</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> Person</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>Map</code>还是<code>WeakMap</code></p>
+<ul>
+<li>需要使用对象作为键名的时候最佳选择是<code>WeakMap</code></li>
+<li>优先使用<code>WeakMap</code>， 因为它会优化你的内存使用和避免在一个数据不再访问的情况下出现内存泄露的问题。</li>
+<li><code>WeakMap</code>的内容拥有非常小的可见性， 因为它只能通过get方法来访问， 而不具有forEach, clear()， size等方法或者属性来管理内容， 如果你需要知道他们的容量的话， 那么<code>Map</code>会更加合适， 但是此时需要注意内存的使用情况</li>
+<li>如果你需要使用非对象作为键名的话， 那么两者之间你只能选择<code>Map</code></li>
+</ul>
+</li>
+<li><code>Set</code>, <code>Map</code>, <code>WeakSet</code>, <code>WeakMap</code>判断是否是根据<code>Object.is</code>来判断是重复键的</li>
+</ul>
+<h1 id="迭代器-Iterator-和生成器-Generator"><a href="#迭代器-Iterator-和生成器-Generator" class="headerlink" title="迭代器(Iterator)和生成器(Generator)"></a>迭代器(Iterator)和生成器(Generator)</h1><ul>
+<li>迭代器</li>
+<li><p>生成器</p>
+<ul>
+<li>生成器是一种能够返回迭代器的特殊函数</li>
+<li>在<code>function</code>关键字的后面使用星号来进行标识</li>
+<li><code>yield</code>关键字可以指定每次迭代器应该返回的值。</li>
+<li>每次执行完一次<code>yield</code>之后， 函数都会停止执行， 在下一次next()的时候， 再恢复执行</li>
+<li><p>生成器表达式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span> *(<span class="params">items</span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = items.length; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">yield</span> items[i];</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>不能使用箭头函数创建生成器</p>
+</li>
+</ul>
+</li>
+<li>for of<ul>
+<li>该语句将会着眼于集合内容而非索引(for key of arr, 那么key则为索引上的那个值， 而非索引本身)</li>
+<li>对于没有实现iterator接口， 及null, undefined使用for..of将会报错</li>
+</ul>
+</li>
+<li><p>访问默认迭代器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span><span class="string">`,2, 3, 4, 5, 6];</span></div><div class="line">var i = arr[Symbol.iterator]();</div><div class="line">i.next(); // Object &#123;value: 1, done: false&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>检测是否实现iterator接口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isIterable</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> obj[<span class="built_in">Symbol</span>.iterator] === <span class="string">'function'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建iterable</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> collection = &#123;</div><div class="line">  <span class="attr">items</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</div><div class="line">  * [<span class="built_in">Symbol</span>.iterator] () &#123; <span class="comment">// 注意星号和方括号</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> <span class="keyword">this</span>.items) &#123;</div><div class="line">      <span class="keyword">yield</span> item;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> collection) <span class="built_in">console</span>.log(value);</div><div class="line"><span class="comment">// 1 2 3 4 5 6</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>集合的Iterator</p>
+<ul>
+<li>Array, Map, Set的实例是默认实现了Iterator接口的</li>
+<li>上述三种类型都有三种相同的内置迭代器</li>
+<li>entries()  — 返回键值对</li>
+<li>values()  — 返回值</li>
+<li>keys() — 返回键</li>
+<li>使用的时候都是`for (let item of arr.entries())</li>
+<li>每一种集合都有一种默认的迭代器， Array和Set的是values(), Map的是entries()`</li>
+<li>字符串迭代器</li>
+<li>NodeList迭代器</li>
+</ul>
+</li>
+<li>给迭代器传递参数<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> *<span class="title">add</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> first = <span class="keyword">yield</span> <span class="number">1</span>;</div><div class="line">  <span class="keyword">let</span> second = <span class="keyword">yield</span> first + <span class="number">2</span>;</div><div class="line">  <span class="keyword">yield</span> second + <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = add();</div><div class="line">a.next(); <span class="comment">// Object &#123;value: 1, done: false&#125;</span></div><div class="line">a.next(<span class="number">4</span>); <span class="comment">// Object &#123;value: 6, done: false&#125;</span></div><div class="line">a.next(<span class="number">5</span>); <span class="comment">// Object &#123;value: 8, done: false&#125;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>但是第一次迭代的时候给next()传递参数是无效的</strong><br>在生成器里面， 第一次迭代之后yield的返回值由调用next()的时候传递的参数决定。</p>
+<ul>
+<li>迭代器错误这里还有点问题 — P202</li>
+<li>生成器里的return语句<br>生成器里一旦包含return语句， 那么在到达那里的时候， 就会直接结束迭代器的迭代状态， 也就是说，在这次的产出值里， done的值为true, 无论迭代是否完成， 如果return 提供了值， 那么value将会是该值， 否则为undefined<br>使用return指定的值只能使用1次， 下次调用next()方法的时候， 其值会被重置成undefined;</li>
+</ul>
+<p><strong>所有被return指定的值都不会出现在for…of和扩展操作符中， 因为此时的done的状态是true, 而一旦done为true， 他们就不会读取value</strong></p>
+<ul>
+<li>生成器代理<ul>
+<li>在一个生成器里yield 另外一个生成器， 注意的是， yield的后面也要跟星号。</li>
+<li>此时他们会按照次序依次执行。</li>
+<li>此时， 子生成器里的return的值会作为yield该生成器的值</li>
+<li>Generator Task Runner P212</li>
+</ul>
+</li>
+</ul>
+<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><ul>
+<li>class的contructor方法等价于构造器</li>
+<li>class只是一颗语法糖</li>
+<li>class声明不同于函数声明， 没有声明提升， 它类似于let声明（所以重复声明会报错）</li>
+<li>class里的代码都会运行于严格模式下</li>
+<li>所有的方法都是不可枚举的。</li>
+<li>所有的方法都不具有[[construct]]内部属性， 所以不能使用new操作符</li>
+<li>对使用class声明的构造器， 没有使用new操作符， 会报错</li>
+<li>在class内部方法内重写class的名称将会抛出错误</li>
+<li>含有name属性的class<br>其name属性只能在class内部方法内使用</li>
+<li>访问器属性<ul>
+<li>私有属性应该在constructor里面创建， 同时也可以在原型上定义访问器属性。</li>
+<li>要创建getter， 使用关键字get， 后面跟上空格 ， 再加上标识符, getter属性是不可枚举的</li>
+</ul>
+</li>
+<li><p>class 里面使用生成器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Col = <span class="class"><span class="keyword">class</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span> () &#123;</div><div class="line">    <span class="keyword">this</span>.items = [];</div><div class="line">  &#125;</div><div class="line">  * [<span class="built_in">Symbol</span>.iterator] () &#123;</div><div class="line">    <span class="keyword">yield</span> *<span class="keyword">this</span>.items.values();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Col();</div><div class="line">c.items.push(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</div><div class="line">[...c]; <span class="comment">// [1, 2, 3, 4]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>静态成员</p>
+<ul>
+<li>使用static, 静态成员是直接定义在构造器上的方法， 与不受实例影响， 通常情况下， 一个构造器里可能调用， 但是和实例没有直接关系的方法， 就可以使用静态方法。</li>
+<li>静态成员不能被实例访问， 只能直接在class内部访问静态成员</li>
+</ul>
+</li>
+<li>继承<ul>
+<li>类通过使用相似的<code>extends</code>关键字来实现从指定的构造器继承 。 通过在constructor里使用super()关键字， 可以访问基类。</li>
+<li>在继承当中， 如果没有指定constructor ， 那么super()将会自动调用</li>
+</ul>
+</li>
+<li><p>使用super的时候需要注意西夏几点：</p>
+<ul>
+<li>只能在派生类（继承）当中使用super</li>
+<li>在constructor里面使用this之前，必须先调用super()以初始化this</li>
+<li>避免调用suepr的唯一方法就是在constructor里面返回一个对象。</li>
+</ul>
+</li>
+<li><p>重写父类方法</p>
+<ul>
+<li>通过在子类中使用与父类相同的方法名， 就可以重写父类的方法</li>
+<li>可以通过super来访问父类的方法，如： <code>super.getName()</code></li>
+</ul>
+</li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/读书/">读书</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/09/Bash-for-windows-设置别名/"  data-tooltip="git bash 设置别名">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/" data-tooltip="electron no path.txt的解决办法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 前端小虾蟹. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/09/Bash-for-windows-设置别名/"  data-tooltip="git bash 设置别名">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/" data-tooltip="electron no path.txt的解决办法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">前端小虾蟹</h4>
+        
+            <div id="about-card-bio"><p><a href="https://noteawesome.com/pro/">个人简介</a></p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>日事清</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Beijing
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    autofocus="autofocus"/>
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/02/01/2015小记/">
+                            <h3 class="media-heading">2015小记</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年2月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>算算日子，从9月份接触前端至今，已经过了有5个月了。到现在，想到自己走上程序员这条路的缘由，都觉得满是惊奇。 </p>
+<p>仔细说起来，还得从大四的那段时间开始说起。原本自己是准备去当兵的，为此，还在大二的时候做了近视手术（话说从来很少向家里开口要钱的我，当初要钱做手术的时候，都觉得脸上烧的不行）。因为有了这样的念想，大四也没怎么找工作，其实也有找过，可是核电几巨头都看不上俺o╯□╰o。虽然传说中大学生当兵，只要没太大的问题，一般都能过的，不过为了以防万一，我还是随便签了一份工作。哦，对了，在3月份的时候，因为觉得没什么事情做，还去考了个公务员，虽然也进面了，但是因为和当兵体检的时间冲突，就没有报名面试。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/用来放一些tips中的DEMO/">
+                            <h3 class="media-heading">用来放一些tips中的DEMO</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                            <h3 class="media-heading">纯CSS实现单击锚点平滑切换的效果</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置<code>overflow: hidden</code>，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/设置-text-overflow-ellipsis-后引起的文本对齐问题/">
+                            <h3 class="media-heading">设置text-overflow為ellipsis后引起的文本对齐问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>最近在做网页的时候用到了文本溢出隐藏的功能，但是出现了一些小问题，下面先放上示例代码吧。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/17/我的时间都去哪儿了/">
+                            <h3 class="media-heading">我的时间都去哪儿了</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月17日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>前段时间把网给停了， 理由是在有网的情况下， 我每天在回到家后都把为数不多的时间浪费在上网上面去了， 虽然能有所收获，但是总体而言是弊大于利的， 毕竟大部分的时间里我都是在做着一些无关紧要的事情。所以我把网停了， 希望能够借助这种手段来强迫自己不断地学习新的东西。 效果是有的， 然而我依然对自己不是很满意。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/17/近期学习计划及总结/">
+                            <h3 class="media-heading">近期学习计划及总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月17日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>最近大概又是进入了一个迷茫期。   </p>
+<p>虽然自己也知道贪多嚼不烂的道理， 但是却总是觉得应该优先提升自己知识上的广度， 等对前后端服务器有了一个宏观上的认识了， 再去提升知识的深度。 所以这段时间把<code>CSS</code>, <code>JS</code>一类的东西给放下了， 开始学习<code>php</code>, <code>mysql</code>， 原本的打算是先学着这个， 弄熟悉了打好基础了， 再去学其他的。 结果呢， 学了一些基础的东西后， 又想要开始学算法， 然后买了本算法书， 结果算法书的里面用的语言是<code>java</code>, 然后我又继续开始学<code>JAVA</code>。 虽然说里面的有些东西用JS也是可以实现的， 但是总觉得照着书本上先尝试一遍才能更好的理解。<strong>5.24注： 现在感觉还是用JS先实现一遍比较好→＿←→＿←→＿←</strong> 然而我现在算法还没学完， 就想要开始学<code>linux</code>和<code>nginx</code>了。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/03/记一次事件捕获的妙用/">
+                            <h3 class="media-heading">记一次事件捕获的妙用</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><code>JavaScript</code>事件流有事件捕获， 处于目标及事件冒泡三个阶段。 在使用<code>addEventListener</code>注册事件的时候, 其第三个参数也可以选择将事件注册在哪个阶段。 平时我们事件大多都是注册在冒泡阶段的， 所以第三个参数一般都是传递的<code>false</code>， 由于很少使用到事件捕获， 所以久而久之也就忘了还有这一茬了。但是其实在某些特定的场景下， 事件捕获还是挺有用的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/03/GitHub仓库绑定二级域名/">
+                            <h3 class="media-heading">GitHub仓库绑定二级域名</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><ol>
+<li><p>在仓库创建<code>gh-pages</code>分支</p>
+</li>
+<li><p>在该分支根目录下添加<code>CNAME</code>文件，文件内容是你希望指向的域名，需要注意的是不需要加协议，如期望网址是<code>http://algorithms.noteawesome.com</code>的话， 就直接写<code>algorithms.noteawesome.com</code>.</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/12/关于overflow-x的一点小东西/">
+                            <h3 class="media-heading">关于overflow-x的一点小东西</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><a href="https://jsfiddle.net/">DEMO地址</a></p>
+<p>绝对定位元素虽然脱离文档流了， 但是依然会受到父元素或者祖先元素的<code>overflow</code>属性的影响。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/15/正则表达式/">
+                            <h3 class="media-heading">正则表达式</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><h1 id="RegExp学习总结"><a href="#RegExp学习总结" class="headerlink" title="RegExp学习总结"></a>RegExp学习总结</h1></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 19 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://noteawesome.com/2016/08/08/Understanding-ECMAScript6读书笔记/';
+                 
+                    this.page.identifier = '2016/08/08/Understanding-ECMAScript6读书笔记/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = '前端小虾蟹';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+    </body>
+</html>

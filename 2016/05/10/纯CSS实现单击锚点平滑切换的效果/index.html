@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="哎呀标题迷路了">
+    <title>纯CSS实现单击锚点平滑切换的效果 - 哎呀标题迷路了</title>
+    <meta name="author" content="前端小虾蟹">
+    
+    
+    
+    <meta name="description" content="有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置overflow: hidden，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="纯CSS实现单击锚点平滑切换的效果">
+<meta property="og:url" content="http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/index.html">
+<meta property="og:site_name" content="哎呀标题迷路了">
+<meta property="og:description" content="有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置overflow: hidden，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。">
+<meta property="og:updated_time" content="2017-03-21T00:20:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="纯CSS实现单击锚点平滑切换的效果">
+<meta name="twitter:description" content="有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置overflow: hidden，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://noteawesome.com/assets/images/lookAtMe.jpeg"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-yrst5vo1nxaxbp2g3v9na2wg1lixlpr3ghbjdvskeixmu79deycecx3rh4bt.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-76738066-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?74b53e5f27776bad072a049eea077d01";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">哎呀标题迷路了</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">前端小虾蟹</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p><a href="https://noteawesome.com/pro/">个人简介</a></p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link open-algolia-search"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/374632897/" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            纯CSS实现单击锚点平滑切换的效果
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-05-10T14:36:25+08:00">
+	
+		    5月 10, 2016
+    	
+    </time>
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置<code>overflow: hidden</code>，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。<br><a id="more"></a><br>但是在一些个人主页中，比如github的个人主页（只是主页而已，也就是username.github.io）上会禁止JS脚本的运行，这个时候如果还是想通过单击锚点平滑切换的功能的话，应该怎么办呢？</p>
+<p>原谅我是一个前端初学者，傻想了很久也想不到什么办法，然后就百度谷歌了。</p>
+<p>后来找到了一些方法，比如用radio配合他的check属性来实现，<a href="http://tympanus.net/codrops/2012/06/12/css-only-responsive-layout-with-smooth-transitions/" target="_blank" rel="external">文章在这里</a>,关于这个方法，<a href="http://www.imooc.com/view/252" target="_blank" rel="external">慕课</a>上也有专门的教程，大家也可以去看看。</p>
+<p>但是可不可以不插入radio就实现对应的效果呢？ 答案是有的。</p>
+<p>那就是利用<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/%3Atarget" target="_blank" rel="external">:target</a>伪类，这个选择器可以选择当前活动的锚点,那么利用这个属性我们就可以实现自己想要的效果了。</p>
+<p>代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#tag1"</span>&gt;</span>Tag1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#tag2"</span>&gt;</span>Tag2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#tag3"</span>&gt;</span>Tag3<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"tag1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"tag2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"tag3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-tag">div</span> &#123;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#container</span> &#123;</div><div class="line">  <span class="attribute">margin-top</span>: <span class="number">10px</span>;</div><div class="line">  <span class="attribute">outline</span>: <span class="number">1px</span> solid red;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#tag1</span>, <span class="selector-id">#tag2</span>, <span class="selector-id">#tag3</span> &#123;</div><div class="line">  <span class="attribute">transition</span>: all ease-out .<span class="number">2s</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">top</span>:<span class="number">0</span></div><div class="line">  left:<span class="number">0</span>;</div><div class="line">  <span class="attribute">right</span>:<span class="number">0</span>;</div><div class="line">  <span class="attribute">bottom</span>:<span class="number">0</span>;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">  </div><div class="line">&#125;</div><div class="line"><span class="selector-id">#tag1</span> &#123;</div><div class="line">  <span class="attribute">background</span>: <span class="number">#f66</span>;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#tag2</span> &#123;</div><div class="line">  <span class="attribute">background</span>: orange;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#tag3</span> &#123;</div><div class="line">  <span class="attribute">background</span>: gray;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#container</span> &gt; <span class="selector-tag">div</span><span class="selector-pseudo">:target</span> &#123;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">1000</span>;</div><div class="line">  <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://jsfiddle.net/243kjL60/2/" target="_blank" rel="external">查看DEMO</a></p>
+<p>上面的例子是通过绝对定位配合z-index和透明度来实现的动态效果。先将所有的元素的opacity设为0，然后为了默认显示出来第一个元素，所以第一个元素的opacity为1，z-index为1。然后单击就可以实现动态切换了。</p>
+<p>其实我最先尝试的是通过给<code>#container</code>设置<code>overflow: hidden;</code>, 为它的子元素设置<code>height:100%;</code>，然后给target设置margin-top为负的百分比值来实现相应效果的，毕竟比较喜欢这种从下往上冒或者从上往下掉的感觉嘛。。。但是在实现过程中遇到了一点小问题，那就是当Tag2和Tag3相互切换的时候，居然只会移动到一半就不再动了，如果把<code>overflow: hidden</code>去掉，显示的就是自己期望的效果。<a href="https://jsfiddle.net/bezbu3j2/" target="_blank" rel="external">一个有问题的DEMO</a> </p>
+<p>后来自己想到了解决的办法，那就是给container包裹一个div，然后把<code>overflow: hidden</code>设置在这个元素身上，再把container的overflow去掉，设置高度为它子元素的高度，这样就能显示正常了。 <a href="https://jsfiddle.net/dc3svdvf/4/" target="_blank" rel="external">DEMO在这里</a>.</p>
+<p>虽然找到了解决办法，但是对于<a href="https://jsfiddle.net/bezbu3j2/" target="_blank" rel="external">问题DEMO</a> 里的这种怪异行为真的不理解，如果各位谁知道的话，还请告知，谢谢。</p>
+<p>参见：<br><a href="http://stackoverflow.com/questions/17631417/css-pure-css-scroll-animation" target="_blank" rel="external">stackoverflow - 纯CSS滚动效果</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/10/设置-text-overflow-ellipsis-后引起的文本对齐问题/"  data-tooltip="设置text-overflow為ellipsis后引起的文本对齐问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/10/用来放一些tips中的DEMO/" data-tooltip="用来放一些tips中的DEMO">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 前端小虾蟹. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/10/设置-text-overflow-ellipsis-后引起的文本对齐问题/"  data-tooltip="设置text-overflow為ellipsis后引起的文本对齐问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/10/用来放一些tips中的DEMO/" data-tooltip="用来放一些tips中的DEMO">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/lookAtMe.jpeg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">前端小虾蟹</h4>
+        
+            <div id="about-card-bio"><p><a href="https://noteawesome.com/pro/">个人简介</a></p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>日事清</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Beijing
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    autofocus="autofocus"/>
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/02/01/2015小记/">
+                            <h3 class="media-heading">2015小记</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年2月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>算算日子，从9月份接触前端至今，已经过了有5个月了。到现在，想到自己走上程序员这条路的缘由，都觉得满是惊奇。 </p>
+<p>仔细说起来，还得从大四的那段时间开始说起。原本自己是准备去当兵的，为此，还在大二的时候做了近视手术（话说从来很少向家里开口要钱的我，当初要钱做手术的时候，都觉得脸上烧的不行）。因为有了这样的念想，大四也没怎么找工作，其实也有找过，可是核电几巨头都看不上俺o╯□╰o。虽然传说中大学生当兵，只要没太大的问题，一般都能过的，不过为了以防万一，我还是随便签了一份工作。哦，对了，在3月份的时候，因为觉得没什么事情做，还去考了个公务员，虽然也进面了，但是因为和当兵体检的时间冲突，就没有报名面试。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/用来放一些tips中的DEMO/">
+                            <h3 class="media-heading">用来放一些tips中的DEMO</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/">
+                            <h3 class="media-heading">纯CSS实现单击锚点平滑切换的效果</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>有时想实现一个功能，比如想让页面不出现滚动条，但是却能装下更多的东西，这个时候我们会对某个容器设 置<code>overflow: hidden</code>，然后通过锚点来实现单击切换页面（其实只是控制显示的内容）的效果。但是通过锚点来跳到指定内容的不足之处在于，没有什么过渡效果，很突兀的就跳到了目标点。当然，也可以通过JS或者jQuery来实现自己想要的动态切换效果，这一类的文章一搜一大堆，这里就不赘述了。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/10/设置-text-overflow-ellipsis-后引起的文本对齐问题/">
+                            <h3 class="media-heading">设置text-overflow為ellipsis后引起的文本对齐问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月10日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>最近在做网页的时候用到了文本溢出隐藏的功能，但是出现了一些小问题，下面先放上示例代码吧。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/17/我的时间都去哪儿了/">
+                            <h3 class="media-heading">我的时间都去哪儿了</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月17日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>前段时间把网给停了， 理由是在有网的情况下， 我每天在回到家后都把为数不多的时间浪费在上网上面去了， 虽然能有所收获，但是总体而言是弊大于利的， 毕竟大部分的时间里我都是在做着一些无关紧要的事情。所以我把网停了， 希望能够借助这种手段来强迫自己不断地学习新的东西。 效果是有的， 然而我依然对自己不是很满意。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/05/17/近期学习计划及总结/">
+                            <h3 class="media-heading">近期学习计划及总结</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年5月17日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>最近大概又是进入了一个迷茫期。   </p>
+<p>虽然自己也知道贪多嚼不烂的道理， 但是却总是觉得应该优先提升自己知识上的广度， 等对前后端服务器有了一个宏观上的认识了， 再去提升知识的深度。 所以这段时间把<code>CSS</code>, <code>JS</code>一类的东西给放下了， 开始学习<code>php</code>, <code>mysql</code>， 原本的打算是先学着这个， 弄熟悉了打好基础了， 再去学其他的。 结果呢， 学了一些基础的东西后， 又想要开始学算法， 然后买了本算法书， 结果算法书的里面用的语言是<code>java</code>, 然后我又继续开始学<code>JAVA</code>。 虽然说里面的有些东西用JS也是可以实现的， 但是总觉得照着书本上先尝试一遍才能更好的理解。<strong>5.24注： 现在感觉还是用JS先实现一遍比较好→＿←→＿←→＿←</strong> 然而我现在算法还没学完， 就想要开始学<code>linux</code>和<code>nginx</code>了。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/03/记一次事件捕获的妙用/">
+                            <h3 class="media-heading">记一次事件捕获的妙用</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><code>JavaScript</code>事件流有事件捕获， 处于目标及事件冒泡三个阶段。 在使用<code>addEventListener</code>注册事件的时候, 其第三个参数也可以选择将事件注册在哪个阶段。 平时我们事件大多都是注册在冒泡阶段的， 所以第三个参数一般都是传递的<code>false</code>， 由于很少使用到事件捕获， 所以久而久之也就忘了还有这一茬了。但是其实在某些特定的场景下， 事件捕获还是挺有用的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/03/GitHub仓库绑定二级域名/">
+                            <h3 class="media-heading">GitHub仓库绑定二级域名</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月3日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><ol>
+<li><p>在仓库创建<code>gh-pages</code>分支</p>
+</li>
+<li><p>在该分支根目录下添加<code>CNAME</code>文件，文件内容是你希望指向的域名，需要注意的是不需要加协议，如期望网址是<code>http://algorithms.noteawesome.com</code>的话， 就直接写<code>algorithms.noteawesome.com</code>.</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/12/关于overflow-x的一点小东西/">
+                            <h3 class="media-heading">关于overflow-x的一点小东西</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月12日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p><a href="https://jsfiddle.net/">DEMO地址</a></p>
+<p>绝对定位元素虽然脱离文档流了， 但是依然会受到父元素或者祖先元素的<code>overflow</code>属性的影响。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://noteawesome.com/2016/06/15/正则表达式/">
+                            <h3 class="media-heading">正则表达式</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年6月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><h1 id="RegExp学习总结"><a href="#RegExp学习总结" class="headerlink" title="RegExp学习总结"></a>RegExp学习总结</h1></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 19 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://noteawesome.com/2016/05/10/纯CSS实现单击锚点平滑切换的效果/';
+                 
+                    this.page.identifier = '2016/05/10/纯CSS实现单击锚点平滑切换的效果/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = '前端小虾蟹';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+    </body>
+</html>
