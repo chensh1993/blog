@@ -6,25 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="哎呀标题迷路了">
-    <title>字符串的双重转义 - 哎呀标题迷路了</title>
+    <title>反思 - 哎呀标题迷路了</title>
     <meta name="author" content="前端小虾蟹">
     
     
     
-    <meta name="description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
+    <meta name="description" content="最近一段时间， 自己的开发效率变低了， 另外自己的学习目标也一直摇摆不定， 又处于之前那种三天打鱼两天晒网的状态， 一件东西， 学了一会儿， 还没学完， 还没吃透， 就去学其他的了。 到最后是什么也没有学成。 自己似乎也变得有点好高骛远， 眼前之事尚未落实， 就已经开始想要着眼于未来了。 所以我觉得自己应该抽点时间好好反思一下， 这两天在坐公交的时候也一直在想这个问题， 似乎找到了一些答案， 准备">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="字符串的双重转义">
-<meta property="og:url" content="http://noteawesome.com/2016/07/05/字符串的双重转义/index.html">
+<meta property="og:title" content="反思">
+<meta property="og:url" content="http://noteawesome.com/2017/03/22/反思/index.html">
 <meta property="og:site_name" content="哎呀标题迷路了">
-<meta property="og:description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/%E9%94%99%E8%AF%AF%E8%AF%A6%E6%83%85.png">
-<meta property="og:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705131425.png">
-<meta property="og:updated_time" content="2017-03-21T00:20:12.000Z">
+<meta property="og:description" content="最近一段时间， 自己的开发效率变低了， 另外自己的学习目标也一直摇摆不定， 又处于之前那种三天打鱼两天晒网的状态， 一件东西， 学了一会儿， 还没学完， 还没吃透， 就去学其他的了。 到最后是什么也没有学成。 自己似乎也变得有点好高骛远， 眼前之事尚未落实， 就已经开始想要着眼于未来了。 所以我觉得自己应该抽点时间好好反思一下， 这两天在坐公交的时候也一直在想这个问题， 似乎找到了一些答案， 准备">
+<meta property="og:updated_time" content="2017-03-22T14:11:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符串的双重转义">
-<meta name="twitter:description" content="缘起习惯了SPA的开发模式， 现在随便弄点什么东西， 渲染HTML什么的也总是通过JS来了， 但是在JS里写HTML总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。">
-<meta name="twitter:image" content="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png">
+<meta name="twitter:title" content="反思">
+<meta name="twitter:description" content="最近一段时间， 自己的开发效率变低了， 另外自己的学习目标也一直摇摆不定， 又处于之前那种三天打鱼两天晒网的状态， 一件东西， 学了一会儿， 还没学完， 还没吃透， 就去学其他的了。 到最后是什么也没有学成。 自己似乎也变得有点好高骛远， 眼前之事尚未落实， 就已经开始想要着眼于未来了。 所以我觉得自己应该抽点时间好好反思一下， 这两天在坐公交的时候也一直在想这个问题， 似乎找到了一些答案， 准备">
     
     
         
@@ -217,13 +213,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            字符串的双重转义
+            反思
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-07-05T12:38:33+08:00">
+    <time itemprop="datePublished" datetime="2017-03-22T22:02:18+08:00">
 	
-		    7月 05, 2016
+		    3月 22, 2017
     	
     </time>
     
@@ -233,38 +229,14 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>习惯了<code>SPA</code>的开发模式， 现在随便弄点什么东西， 渲染<code>HTML</code>什么的也总是通过<code>JS</code>来了， 但是在<code>JS</code>里写<code>HTML</code>总归是影响代码美观的， 虽然有现成的模板工具可以使用， 但是这人一旦任性起来是真的拉都拉不住。 某日闲得飞起， 就准备写这么一个小东西。<br><a id="more"></a></p>
-<p>思路是这样的， 在一个目录下专门存放<code>html</code>, 然后通过<code>Nodejs</code>来读取<code>html</code>, 之后根据文件名和文件内容生成一个对象，如下所示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">  <span class="attr">test</span>: <span class="string">'&lt;div&gt;div1&lt;/div&gt;'</span>,</div><div class="line">  <span class="attr">test2</span>: <span class="string">'&lt;div&gt;div2&lt;/div&gt;'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>然后使用<code>JSON.stringify()</code>将这个对象转化为字符串， 存储为一个<code>JS</code>文件， 当然， 同时还会声明一个变量啊啥的， 大概就下面这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 假设得到的字符串是`&#123;"test":"&lt;div&gt;div1&lt;/div&gt;"&#125;`  那么这个存储字符串的文件内容大概就是这样</span></div><div class="line"><span class="keyword">const</span> template = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"test":"&lt;div&gt;div1&lt;/div&gt;"&#125;'</span>);</div></pre></td></tr></table></figure>
-<p>之后在<code>html</code>里面引入这个<code>JS</code>, 然后就可以通过<code>template.test</code>来访问对应的<code>html</code>内的东西了。</p>
-<p>样子大概就是这个样子。然而人生不如意之事十之八九， 这句话放在码代码身上也不例外。也许还得改一改， 人生不如意之事100%！！！</p>
-<p>上面的<code>html</code>还是比较简单的， 然而谁会像我一样闲的蛋疼专门建一个<code>html</code>文件就为了放一个<code>div</code>.</p>
-<p>稍微来个复杂的， 假如一个叫<code>test2</code>的<code>html</code>内容如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>然后最后生成的文件内容是这样的：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> template = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"test":"&lt;div class=\"container\"&gt;\r\n  &lt;div class=\"left\"&gt;&lt;/div&gt;\r\n  &lt;div class=\"right\"&gt;&lt;/div&gt;\r\n&lt;/div&gt;\r\n"&#125;'</span>);</div></pre></td></tr></table></figure>
-<p>耶， 真棒， 看起来好像没什么问题， 人家都还给转义了， 然后放到浏览器里一跑</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705130109.png" alt=""></p>
-<p>看看错误详情</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/%E9%94%99%E8%AF%AF%E8%AF%A6%E6%83%85.png" alt=""></p>
-<p>在错误详情里面可以明显地看到被引号引起来的<code>container</code>和其他周围的字符串颜色并不一样， 但是明明字符串里就加了转义字符的呀。</p>
-<h2 id="症结"><a href="#症结" class="headerlink" title="症结"></a>症结</h2><p>先说说转义字符的意思吧（我瞎蒙的， 说错了别打我）。</p>
-<p>比如<code>&quot;\&quot;&quot;</code>放到浏览器里运行的话， 得到的结果是<code>&quot;&quot;&quot;</code>。这里的斜杠就对中间的那个双引号进行了转义， 告诉浏览器这个东西表示的只是一个引号，你别解析错了， 因此得到的就是三个引号。所以在这里， 当浏览器把一个字面量转变为字符串的时候， 转义了一次， 吞了一次转义字符。</p>
-<p>如下图所示， 可以看到字符串字面量里面本来是有斜线的， 但是赋值给变量之后那斜线就被吃了。</p>
-<p><img src="http://o9ts2tlvd.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720160705131425.png" alt=""></p>
-<p>然后在进行<code>JSON.parse()</code>的时候， 无奈地碰到了双引号， 然后就悲剧地报错了。</p>
-<p>所以在对字符串进行转换， 转变为一个对象的时候依然需要进行转义， 前面提到过， 使用<code>\</code>进行转义， 但是<code>\</code>除了表示字符<code>\</code>之外， 也表示转义字符， 所以这里还需要对’\’进行转义， 也就是进行双转义。</p>
-<p>举个例子， 比如判断某个元素具不具有某个类名</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasClass</span> (<span class="params">sourceCls, cls</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span> + cls + <span class="string">'\\b'</span>, <span class="string">'g'</span>).test(sourceCls);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里就是先对<code>\</code>进行了转义，因此出现了两个<code>\</code>。</p>
-<p>所以简单的来说。。。双转义就是<code>&#39;\&#39; * 2</code>, 原本应该是一个的就上俩， 是两个的就上四个。</p>
-<p>然后负责读取文件生成数据的<code>JS</code>就成了这样</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> obj = &#123;&#125;;</div><div class="line">fs.readFile(<span class="string">'./test.html'</span>, (_, data) =&gt; &#123;</div><div class="line">  obj.test = data.toString();</div><div class="line">  fs.writeFile(<span class="string">'./testJSON.js'</span>, <span class="string">'const template = JSON.parse(\''</span> + getStr(obj) + <span class="string">'\');'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStr</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="comment">// 通过JSON.stringify序列化后的加了转义符号的字符串大概就是\"这个样子</span></div><div class="line">  <span class="comment">// 所以这里的两根斜杠前者只是对后者的转义而已</span></div><div class="line">  <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(data).replace(<span class="regexp">/\\/g</span>, <span class="string">'\\\\'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当然， 上面那种方式比较简单粗暴， 只是为了说明一下怎么解决这个问题而已。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>就我自己的理解来的话， 需要双转义的地方一般是进行了两次解析的， <code>字面量 =&gt; 字符串 =&gt; ..</code>, 这里的<code>..</code>可能是正则表达式， 也可能是其他的啥啥啥。。。</p>
-<p>最后， 感谢<a href="https://segmentfault.com/u/aristotll" target="_blank" rel="external">aristotll</a>对我问题的回答。</p>
+            <p>最近一段时间， 自己的开发效率变低了， 另外自己的学习目标也一直摇摆不定， 又处于之前那种三天打鱼两天晒网的状态， 一件东西， 学了一会儿， 还没学完， 还没吃透， 就去学其他的了。 到最后是什么也没有学成。 自己似乎也变得有点好高骛远， 眼前之事尚未落实， 就已经开始想要着眼于未来了。 所以我觉得自己应该抽点时间好好反思一下， 这两天在坐公交的时候也一直在想这个问题， 似乎找到了一些答案， 准备从以下几个方面来说。 先记下来吧， 等有时间了再来完善， 毕竟我不熬夜， 先拟一个提纲， 主要是担心自己以后会忘记。 毕竟我是准备将它作为以后的警醒来使用的。</p>
+<ul>
+<li>代码设计不合理（进行功能开发的时候， 考虑不全面， 抽象层度不合理， 逻辑不够清晰）</li>
+<li>过于追求效率以至于对细节不够在意</li>
+<li>一段时间之内只为一个目标而奋斗。</li>
+<li>善于做总结，一定要做总结， 尤其是在完成一些有意义有挑战性的任务之后。</li>
+<li>积极参与开源项目。</li>
+</ul>
 
             
         </div>
@@ -274,7 +246,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/随笔/">随笔</a>
 
             </div>
         
@@ -283,7 +255,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/"  data-tooltip="electron no path.txt的解决办法">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -291,7 +263,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/04/HTML5-Canvas核心技术读书感悟/" data-tooltip="HTML5 Canvas核心技术读书感悟">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/21/近况/" data-tooltip="近况">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -306,17 +278,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -364,7 +336,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/12/electron-no-path-txt的解决办法/"  data-tooltip="electron no path.txt的解决办法">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -372,7 +344,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/04/HTML5-Canvas核心技术读书感悟/" data-tooltip="HTML5 Canvas核心技术读书感悟">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/21/近况/" data-tooltip="近况">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -387,17 +359,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -423,17 +395,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2016/07/05/字符串的双重转义/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://noteawesome.com/2017/03/22/反思/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -717,9 +689,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://noteawesome.com/2016/07/05/字符串的双重转义/';
+                 this.page.url = 'http://noteawesome.com/2017/03/22/反思/';
                  
-                    this.page.identifier = '2016/07/05/字符串的双重转义/';
+                    this.page.identifier = '2017/03/22/反思/';
                  
              };
             (function() {
