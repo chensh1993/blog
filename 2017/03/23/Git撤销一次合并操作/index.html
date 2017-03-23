@@ -6,21 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="哎呀标题迷路了">
-    <title>正则表达式 - 哎呀标题迷路了</title>
+    <title>Git撤销一次合并操作 - 哎呀标题迷路了</title>
     <meta name="author" content="前端小虾蟹">
     
     
     
-    <meta name="description" content="RegExp学习总结">
+    <meta name="description" content="平时用Git命令行用得比较多， 还以为够熟悉了， 结果今天发生的事， 却让我再一次意识到， 我还差得远呢。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="正则表达式">
-<meta property="og:url" content="https://noteawesome.com/2016/06/15/正则表达式/index.html">
+<meta property="og:title" content="Git撤销一次合并操作">
+<meta property="og:url" content="https://noteawesome.com/2017/03/23/Git撤销一次合并操作/index.html">
 <meta property="og:site_name" content="哎呀标题迷路了">
-<meta property="og:description" content="RegExp学习总结">
-<meta property="og:updated_time" content="2017-03-21T00:20:12.000Z">
+<meta property="og:description" content="平时用Git命令行用得比较多， 还以为够熟悉了， 结果今天发生的事， 却让我再一次意识到， 我还差得远呢。">
+<meta property="og:image" content="https://assets.noteawesome.com/3.jpeg">
+<meta property="og:updated_time" content="2017-03-23T05:24:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则表达式">
-<meta name="twitter:description" content="RegExp学习总结">
+<meta name="twitter:title" content="Git撤销一次合并操作">
+<meta name="twitter:description" content="平时用Git命令行用得比较多， 还以为够熟悉了， 结果今天发生的事， 却让我再一次意识到， 我还差得远呢。">
+<meta name="twitter:image" content="https://assets.noteawesome.com/3.jpeg">
     
     
         
@@ -213,13 +215,13 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            正则表达式
+            Git撤销一次合并操作
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-06-15T13:56:14+08:00">
+    <time itemprop="datePublished" datetime="2017-03-23T12:23:00+08:00">
 	
-		    6月 15, 2016
+		    3月 23, 2017
     	
     </time>
     
@@ -229,63 +231,35 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h1 id="RegExp学习总结"><a href="#RegExp学习总结" class="headerlink" title="RegExp学习总结"></a>RegExp学习总结</h1><a id="more"></a>
-<h2 id="字符集合（Character-Sets）"><a href="#字符集合（Character-Sets）" class="headerlink" title="字符集合（Character Sets）"></a>字符集合（Character Sets）</h2><ul>
-<li>[xyz] 字符组|字符集合， 匹配集合中的任意一个字符， 可以使用连字符’-‘来指定一个范围。 如<code>[abcd]</code>可以表示为<code>[a-d]</code>。</li>
-<li>[^xyz] 反义字符组， 匹配中括号中不存在的内容</li>
-</ul>
-<h2 id="字符边界-Boundaries"><a href="#字符边界-Boundaries" class="headerlink" title="字符边界 (Boundaries)"></a>字符边界 (Boundaries)</h2><ul>
-<li>^  匹配字符串开头</li>
-<li>$  匹配字符串结尾</li>
-<li><p>\b 匹配一个零宽单词边界 如一个字母和一个空格之间， 一个字符串的开头和结尾</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'et'</span>.match(<span class="regexp">/\bet/</span>); <span class="comment">// ["et"]</span></div><div class="line"><span class="string">'testfsad'</span>.match(<span class="regexp">/\bet/</span>) <span class="comment">// null</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>\B 匹配一个零宽非单词边界， 如两个字母之间或两个空格之间</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'   '</span>.match(<span class="regexp">/\B/</span>); <span class="comment">// four white-spaces</span></div><div class="line"><span class="comment">// ["", "", "", ""];</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="分组-Grouping-和-反向引用-back-references"><a href="#分组-Grouping-和-反向引用-back-references" class="headerlink" title="分组(Grouping) 和 反向引用(back references)"></a>分组(Grouping) 和 反向引用(back references)</h2><ul>
-<li><p><code>(x)</code>  </p>
-<p>匹配x并且捕获匹配项。 捕获组(Capturing groups)有性能惩罚， 再次访问被捕获的子字符串最好使用非捕获符号</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'Yes, I wanna earn more money'</span>;</div><div class="line"><span class="regexp">/(\S)*\s/</span>.test(str); </div><div class="line"><span class="built_in">RegExp</span>.$<span class="number">1</span> <span class="comment">// ","</span></div><div class="line"></div><div class="line">/(\S*)\s/.test(str);</div><div class="line"><span class="built_in">RegExp</span>.$<span class="number">1</span> <span class="comment">// '"Yes,"</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><code>\n</code><br>n是一个正整数。 指向正则表达式中第n个括号（从左边开始数）中匹配的字符串 <strong>这里有点问题</strong></p>
-</li>
-<li><code>(?:x)</code><br>匹配x不会捕获匹配项， 非匹配项不能通过RegExp的$1-$9属性访问到。 <h2 id="数量词"><a href="#数量词" class="headerlink" title="数量词"></a>数量词</h2></li>
-<li><code>x*</code><br>匹配前面的模式x 0次或多次</li>
-<li><code>x+</code><br>匹配前面的模式x 1次或多次， 等价于{1,}</li>
-<li><p><code>x*?</code>, <code>x+?</code><br>匹配前面的模式， 但是是执行最小可能匹配</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"Yes, I wanna earn more money"</span>;</div><div class="line">str.match(<span class="regexp">/\w*?/</span>); <span class="comment">// [""]    // 最小匹配模式， 可匹配0次</span></div><div class="line">str.match(<span class="regexp">/\w*/</span>);  <span class="comment">// ["Yes"]  </span></div><div class="line"></div><div class="line">str.match(<span class="regexp">/\w+/</span>);  <span class="comment">// ["Yes"]</span></div><div class="line">str.match(<span class="regexp">/\w+?/</span>); <span class="comment">// ["Y"]   // 最小匹配模式， 只匹配1次</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><code>x?</code><br>匹配前面的模式x 0次或1次 。 如果在数量词<code>*</code>, <code>+</code>, <code>?</code>或者<code>{}</code>任意一个后面添加该符号（?）, 将会使匹配模式变为非贪婪模式(non-greedy)， 即匹配次数最小化， 默认匹配模式是贪婪模式， 即匹配次数最大化。 </p>
-</li>
-<li><p><code>x(?=y)</code> 只有当x后面紧跟着y的时候才会进行匹配， 但是y不会成为匹配内容的一部分  . 注意要加括号</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">var</span> str = <span class="string">'hello world, I feel so good today'</span>;</div><div class="line">  str.match(<span class="regexp">/feel(?= so)/</span>); <span class="comment">// ["feel"]</span></div><div class="line">  <span class="string">``</span><span class="string">` </span></div><div class="line"></div><div class="line">* `x(?!y)<span class="string">`</span></div><div class="line">  只有当x后面不是紧跟着y的时候才会进行匹配</div><div class="line">  </div><div class="line">  `<span class="string">``</span>js</div><div class="line">  str.match(<span class="regexp">/feel(?!so)/</span>); <span class="comment">// ["feel"] // 注意： 中间没有空格</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><code>x|y</code><br>匹配x或者y  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">str.match(<span class="regexp">/hello|world/</span>);         <span class="comment">// ["hello"]</span></div><div class="line"></div><div class="line"><span class="comment">// 此时匹配的是[]内的每一个可能值， 只匹配1次的话就匹配到了'h'， 而此时'|'也只被当成一个普通的字符</span></div><div class="line">str.match(<span class="regexp">/[hello|world]/</span>);       <span class="comment">// ["h"] </span></div><div class="line"><span class="string">'jfsdalk|sajd'</span>.match(<span class="regexp">/[fa|fj]/g</span>); <span class="comment">// ["j", "f", "a", "|", "a", "j"]</span></div></pre></td></tr></table></figure>
-</li>
-<li><p><code>x{n}</code><br>n是一个正整数， 前面的模式连续出现n次时匹配</p>
-</li>
-<li><p><code>x{n,}</code></p>
-</li>
-<li><p><code>x{n,y}</code><br> <strong>Note:</strong> 这里n和y之间不能有空格  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 从url中提取子域名</span></div><div class="line"><span class="keyword">var</span> url = <span class="string">"http://xxx.domain.com"</span>;</div><div class="line">url.replace(<span class="regexp">/https?:\/\/([^.]*)\..*/</span>, <span class="string">'$1'</span>); <span class="comment">// "xxx"</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>参见  <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="external">MDN – 正则表达式</a></p>
+            <p>平时用<code>Git</code>命令行用得比较多， 还以为够熟悉了， 结果今天发生的事， 却让我再一次意识到， 我还差得远呢。<br><a id="more"></a><br><img src="https://assets.noteawesome.com/3.jpeg" alt="你还差得远呢"></p>
+<p>事情的起因是这样的， 我们的官网有这样几个主分支， <code>master</code>, <code>beta</code>, <code>dev</code>, <code>dev</code>是开发分支， <code>beta</code>是对应的内测版本，<code>master</code>对应的正式版本。平时开发的时候都是从<code>dev</code>新开功能分支或者bug分支， 完成之后提PR到<code>dev</code>, 再提PR到<code>beta</code>, 当<code>beta</code>发生<code>pull request</code>事件的时候， 将会触发<code>GitHub</code>的<code>webhook</code>, 然后<code>jenkins</code>进行自动构建与部署。</p>
+<p>这一次的问题是， 小伙伴把新的功能分支合并到<code>beta</code>之后， 测试出了一些问题， 需要撤回上一个版本。那么在只能够使用<code>PR</code>来触发更新的情况下， 应该怎么做呢？</p>
+<p>首先我自然是想到了屡试不爽的<code>git reset --hard &lt;commit&gt;</code>了， 然而这一次并不能成功， 因为使用了<code>reset</code>之后， 并没有产生新的<code>commit</code>, 然后在提<code>PR</code>的时候， 就提不了。 当然，我也想过直接操作<code>beta</code>分支， 在<code>beta</code>上进行<code>reset</code>, 但是这样一来就不能触发自动构建了。</p>
+<p>后来搜了一下， 找到了<code>git revert</code>, 但是这个命令自己压根儿就没使用过， 用起来也是很懵逼的， 我想要像使用<code>git reset</code>那样来用它， 结果报了错， 告诉我缺少<code>-m</code>参数。</p>
+<p>呐， 我参考的文章是<a href="http://hanhan2611.blog.163.com/blog/static/2075771392014428102714312/" target="_blank" rel="external">这个</a></p>
+<p>文章里面讲解的已经比较详细了， 那我这里就不多作介绍了。</p>
+<p>（这篇日志真的好水啊😴😴😴）</p>
+<p>总之， <code>Git</code>这东西， 还是得好好学才行o(╯□╰)o   。</p>
+<p>（顺便吐槽一下， 和上文无关， <code>Cloudflare</code>居然不是用的驼峰命名法， 简直了， 让我这种错字受情何以堪， 之前一直都是写的<code>cloudFlare</code>的， 而且后者不必前者好看吗吗吗吗吗）</p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
         
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Git/">Git</a>
+
+            </div>
+        
         <div class="post-actions-wrap">
     <nav>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/15/chrome开发工具timeline使用/"  data-tooltip="chrome开发工具timeline使用">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -293,7 +267,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/12/关于overflow-x的一点小东西/" data-tooltip="关于overflow-x的一点小东西">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/22/反思/" data-tooltip="反思">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -308,17 +282,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -366,7 +340,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/15/chrome开发工具timeline使用/"  data-tooltip="chrome开发工具timeline使用">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -374,7 +348,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/12/关于overflow-x的一点小东西/" data-tooltip="关于overflow-x的一点小东西">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/22/反思/" data-tooltip="反思">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -389,17 +363,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -425,17 +399,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2016/06/15/正则表达式/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://noteawesome.com/2017/03/23/Git撤销一次合并操作/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -719,9 +693,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'https://noteawesome.com/2016/06/15/正则表达式/';
+                 this.page.url = 'https://noteawesome.com/2017/03/23/Git撤销一次合并操作/';
                  
-                    this.page.identifier = '2016/06/15/正则表达式/';
+                    this.page.identifier = '2017/03/23/Git撤销一次合并操作/';
                  
              };
             (function() {
